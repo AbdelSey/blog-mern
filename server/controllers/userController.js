@@ -40,6 +40,7 @@ export const registerUser = asyncHandler(async (req, res, next) => {
     name,
     email,
     password: hashedPassword,
+    posts: [],
   });
 
   //  if there is a user
@@ -49,7 +50,8 @@ export const registerUser = asyncHandler(async (req, res, next) => {
       id: user._id,
       name: user.name,
       email: user.email,
-      msg: "user created successfully",
+      password: user.password,
+      posts: user.posts,
     });
   } else {
     res.status(400);

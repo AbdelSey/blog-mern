@@ -17,6 +17,13 @@ const userSchema = new Schema({
     required: [true, "Password is required"],
     minlength: 6,
   },
+  posts: [
+    {
+      type: mongoose.Types.ObjectId,
+      ref: "Post",
+      required: [true, "User is required"],
+    },
+  ],
 });
 
 export default mongoose.model("User", userSchema);

@@ -16,7 +16,8 @@ const postSchema = new Schema({
     required: [true, "Image is required"],
   },
   user: {
-    type: String,
+    type: mongoose.Types.ObjectId,
+    ref: "User", // collection name
     required: [true, "User is required"],
   },
 });
