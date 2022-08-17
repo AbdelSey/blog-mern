@@ -6,21 +6,22 @@ export const getAllUsers = asyncHandler(async (req, res, next) => {
   const users = await User.find();
 
   if (!users) {
-    return res.status(404).json({ msg: "no users found" });
+    res.status(404);
+    throw new Error("Users not found");
   }
 
   return res.status(200).json({ users });
 });
 
 // @desc    create new user
-// @route   POST /api/users
+// @route   POST /api/users/signup
 // @access  Public
 
 export const registerUser = asyncHandler(async (req, res, next) => {
-  const { name, email, password } = req.body;
+  const { fullName, userName, email, password, image } = req.body;
 
-  if (!name || !email || !password) {
-    throw new Error("Please provide all fields");
+  if (!fullName || !userName || !email || !password) {
+    throw new Error("Please provide a firstName, lastName, email and password");
   }
 
   // check if user exists
@@ -28,7 +29,7 @@ export const registerUser = asyncHandler(async (req, res, next) => {
 
   if (existingUser) {
     res.status(400);
-    throw new Error("User already exists");
+    throw new Error("User already exists, Please login");
   }
 
   // hash password
@@ -37,19 +38,21 @@ export const registerUser = asyncHandler(async (req, res, next) => {
 
   // create new user
   const user = await User.create({
-    name,
+    fullName,
+    userName,
     email,
     password: hashedPassword,
+    image,
     posts: [],
   });
-
-  //  if there is a user
 
   if (user) {
     res.status(200).json({
       id: user._id,
-      name: user.name,
+      fullName: user.fullName,
+      userName: user.userName,
       email: user.email,
+      image: user.image,
       password: user.password,
       posts: user.posts,
     });
@@ -73,9 +76,10 @@ export const loginUser = asyncHandler(async (req, res, next) => {
   if (existingUser && (await bcrypt.compare(password, existingUser.password))) {
     res.json({
       _id: existingUser._id,
-      name: existingUser.name,
+      fullName: existingUser.fullName,
+      userName: existingUser.userName,
       email: existingUser.email,
-      msg: "user logged in successfully",
+      image: existingUser.image,
     });
   } else {
     res.status(400);
