@@ -73,6 +73,7 @@ export const loginUser = asyncHandler(async (req, res, next) => {
       _id: existingUser._id,
       name: existingUser.name,
       email: existingUser.email,
+      msg: "user logged in successfully",
     });
   } else {
     res.status(400);
