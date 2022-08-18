@@ -60,7 +60,7 @@ export const createPost = asyncHandler(async (req, res) => {
 
   const session = await mongoose.startSession();
   session.startTransaction();
-  
+
   try {
     await post.save({ session });
     exisitingUser.posts.push(post);

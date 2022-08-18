@@ -1,12 +1,59 @@
 import React, { useState } from "react";
+import { registerUser, loginUser } from "./authSlice";
+import { useDispatch } from "react-redux";
 
 const Auth = () => {
+  const [inputs, setInputs] = useState({
+    fullName: "",
+    userName: "",
+    email: "",
+    password: "",
+    cpassword: "",
+    image: "",
+  });
+
+  // changes the values according to the name identifers of the inputs
+  const handleChange = (e) => {
+    setInputs((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
   const [isSignedUp, setisSignedUp] = useState(false);
+  // disaptch
+  const dispatch = useDispatch();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (isSignedUp) {
+      dispatch(
+        registerUser({
+          fullName: inputs.fullName,
+          userName: inputs.userName,
+          email: inputs.email,
+          password: inputs.password,
+          image: inputs.image,
+        })
+      );
+    } else {
+      dispatch(
+        loginUser({
+          name: inputs.name,
+          email: inputs.email,
+          password: inputs.password,
+        })
+      );
+    }
+  };
 
   return (
     <section className="flex items-center justify-center mt-20">
       <article classNameName="">
-        <form className="max-w-sm mx-auto rounded-lg shadow-xl overflow-hidden p-6 space-y-10">
+        <form
+          className="max-w-sm mx-auto rounded-lg shadow-xl overflow-hidden p-6 space-y-10"
+          onSubmit={handleSubmit}
+        >
           <h2 className="text-2xl font-bold text-center">
             {isSignedUp ? "Sign Up" : "Sign In"}
           </h2>
@@ -17,28 +64,32 @@ const Auth = () => {
               <div className="relative border-b-2 focus-within:border-blue-500">
                 <input
                   type="text"
-                  name="fullname"
-                  id="fullname"
+                  name="fullName"
+                  id="fullName"
                   placeholder=" "
+                  value={inputs.fullName}
+                  onChange={handleChange}
                   className="block w-full appearance-none focus:outline-none bg-transparent"
                 />
                 <label
-                  htmlFor="fullname"
+                  htmlFor="fullName"
                   className="absolute top-0 -z-1 duration-200 origin-0"
                 >
-                  Fullname
+                  Full Name
                 </label>
               </div>
               {/* username */}
               <div className="relative border-b-2 focus-within:border-blue-500">
                 <input
                   type="text"
-                  name="username"
+                  name="userName"
                   placeholder=" "
+                  value={inputs.userName}
+                  onChange={handleChange}
                   className="block w-full appearance-none focus:outline-none bg-transparent"
                 />
                 <label
-                  htmlFor="username"
+                  htmlFor="userName"
                   className="absolute top-0 -z-1 duration-200 origin-0"
                 >
                   Username
@@ -53,6 +104,8 @@ const Auth = () => {
             <input
               type="text"
               name="email"
+              value={inputs.email}
+              onChange={handleChange}
               placeholder=" "
               className="block w-full appearance-none focus:outline-none bg-transparent"
             />
@@ -66,6 +119,8 @@ const Auth = () => {
           {/* password */}
           <div className="relative border-b-2 focus-within:border-blue-500">
             <input
+              value={inputs.password}
+              onChange={handleChange}
               type="password"
               name="password"
               placeholder=" "
@@ -79,18 +134,40 @@ const Auth = () => {
             </label>
           </div>
 
+          {/* confirm password */}
+          {isSignedUp && (
+            <div className="relative border-b-2 focus-within:border-blue-500">
+              <input
+                type="password"
+                name="cpassword"
+                value={inputs.cpassword}
+                onChange={handleChange}
+                placeholder=" "
+                className="block w-full appearance-none focus:outline-none bg-transparent"
+              />
+              <label
+                htmlFor="cpassword"
+                className="absolute top-0 -z-1 duration-200 origin-0"
+              >
+                Confirm Password
+              </label>
+            </div>
+          )}
+
           {/* image */}
 
           {isSignedUp && (
             <div className="relative border-b-2 focus-within:border-blue-500">
               <input
+                value={inputs.image}
+                onChange={handleChange}
                 type="file"
-                name="password"
+                name="image"
                 placeholder=" "
                 className="block w-full appearance-none focus:outline-none bg-transparent"
               />
               <label
-                htmlFor="password"
+                htmlFor="image"
                 className="absolute top-0 -z-1 duration-200 origin-0"
               >
                 Image
@@ -100,18 +177,20 @@ const Auth = () => {
 
           {/* submit */}
           <button
-            type="button"
+            type="submit"
             class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 w-full"
           >
-            Register Account
+            {isSignedUp ? "Register" : "Sign In"}
           </button>
 
           <button
             onClick={() => setisSignedUp(!isSignedUp)}
             type="button"
-            class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 w-full"
+            class="text-white bg-gradient-to-r from-blue-400 via-blue-500 to-blue-400 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-blue-500/50  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 w-full"
           >
-            Change to Sign up
+            {isSignedUp
+              ? " Already have an account? Sign In"
+              : "No account? Go ahead and Sign Up!"}
           </button>
         </form>
       </article>

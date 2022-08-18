@@ -55,6 +55,7 @@ export const registerUser = asyncHandler(async (req, res, next) => {
       image: user.image,
       password: user.password,
       posts: user.posts,
+      msg: "User created successfully",
     });
   } else {
     res.status(400);
@@ -80,6 +81,7 @@ export const loginUser = asyncHandler(async (req, res, next) => {
       userName: existingUser.userName,
       email: existingUser.email,
       image: existingUser.image,
+      msg: "User logged in successfully",
     });
   } else {
     res.status(400);
