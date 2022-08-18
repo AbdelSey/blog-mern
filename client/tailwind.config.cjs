@@ -19,7 +19,16 @@ module.exports = {
       // => @media (min-width: 1536px) { ... }
     },
     extend: {
+      transformOrigin: {
+        0: "0%",
+      },
       backgroundImage: {},
+      zIndex: {
+        "-1": "-1",
+      },
+    },
+    variants: {
+      borderColor: ["responsive", "hover", "focus", "focus-within"],
     },
   },
 
