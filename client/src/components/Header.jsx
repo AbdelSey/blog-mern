@@ -1,11 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FcPicture } from "react-icons/fc";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../features/auth/authSlice";
 
 const Header = () => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-
+  const dispatch = useDispatch();
   return (
     <header className="w-[100%]">
       {/* logo */}
@@ -26,7 +27,7 @@ const Header = () => {
               </Link>
             </div>
             <div>
-              <Link to="/posts" className="text-sm">
+              <Link to="/postfeed" className="text-sm">
                 All Posts
               </Link>
             </div>
@@ -38,7 +39,6 @@ const Header = () => {
         <nav className="">
           {/* login */}
           <ul className="flex space-x-4">
-
             {/* unauthenticated links */}
             {!isAuthenticated && (
               <>
@@ -58,11 +58,11 @@ const Header = () => {
 
             {/* authenticated links */}
             {isAuthenticated && (
-              <li>
+              <button onClick={(e) => dispatch(logout())}>
                 <Link to="/auth" className="text-sm">
                   Logout
                 </Link>
-              </li>
+              </button>
             )}
           </ul>
         </nav>

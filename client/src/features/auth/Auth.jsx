@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { registerUser, loginUser } from "./authSlice";
 import { useDispatch } from "react-redux";
-
+import { login } from "./authSlice";
+import { useNavigate } from "react-router-dom";
 const Auth = () => {
   const [inputs, setInputs] = useState({
     fullName: "",
@@ -19,14 +20,17 @@ const Auth = () => {
       [e.target.name]: e.target.value,
     }));
   };
-  const [isSignedUp, setisSignedUp] = useState(false);
+
+  // refers to if the page is on signup form or login in form
+
+  const [isSignUp, setisSignUp] = useState(false);
   // disaptch
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (isSignedUp) {
+    if (isSignUp) {
       dispatch(
         registerUser({
           fullName: inputs.fullName,
@@ -44,6 +48,8 @@ const Auth = () => {
           password: inputs.password,
         })
       );
+      dispatch(login());
+      navigate("/postfeed");
     }
   };
 
@@ -55,11 +61,11 @@ const Auth = () => {
           onSubmit={handleSubmit}
         >
           <h2 className="text-2xl font-bold text-center">
-            {isSignedUp ? "Sign Up" : "Sign In"}
+            {isSignUp ? "Sign Up" : "Sign In"}
           </h2>
 
           {/* fullname */}
-          {isSignedUp && (
+          {isSignUp && (
             <>
               <div className="relative border-b-2 focus-within:border-blue-500">
                 <input
@@ -135,7 +141,7 @@ const Auth = () => {
           </div>
 
           {/* confirm password */}
-          {isSignedUp && (
+          {isSignUp && (
             <div className="relative border-b-2 focus-within:border-blue-500">
               <input
                 type="password"
@@ -156,7 +162,7 @@ const Auth = () => {
 
           {/* image */}
 
-          {isSignedUp && (
+          {isSignUp && (
             <div className="relative border-b-2 focus-within:border-blue-500">
               <input
                 value={inputs.image}
@@ -180,15 +186,15 @@ const Auth = () => {
             type="submit"
             class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 w-full"
           >
-            {isSignedUp ? "Register" : "Sign In"}
+            {isSignUp ? "Register" : "Sign In"}
           </button>
 
           <button
-            onClick={() => setisSignedUp(!isSignedUp)}
+            onClick={() => setisSignUp(!isSignUp)}
             type="button"
             class="text-white bg-gradient-to-r from-blue-400 via-blue-500 to-blue-400 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-blue-500/50  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 w-full"
           >
-            {isSignedUp
+            {isSignUp
               ? " Already have an account? Sign In"
               : "No account? Go ahead and Sign Up!"}
           </button>
