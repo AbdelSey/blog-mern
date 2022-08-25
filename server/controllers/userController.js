@@ -80,6 +80,7 @@ export const loginUser = asyncHandler(async (req, res, next) => {
       userName: existingUser.userName,
       email: existingUser.email,
       image: existingUser.image,
+      posts: existingUser.posts,
       msg: "User logged in successfully",
     });
   } else {

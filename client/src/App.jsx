@@ -1,4 +1,5 @@
-import { Posts, UserPosts, PostDetail, AddPost, Home, Page404 } from "./routes";
+import { Posts, PostDetail, AddPost, Home, Page404 } from "./routes";
+import UserPosts from "./features/posts/UserPosts";
 import Auth from "./features/auth/Auth";
 import { useSelector } from "react-redux";
 import { Header } from "./components";

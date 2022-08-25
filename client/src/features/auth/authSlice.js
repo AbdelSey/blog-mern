@@ -20,6 +20,7 @@ export const registerUser = createAsyncThunk(
         image,
       });
       console.log(response.data);
+      localStorage.setItem("userId", response.data._id);
       return response.data;
     } catch (error) {
       console.log("error", error);
@@ -34,6 +35,7 @@ export const loginUser = createAsyncThunk(
     try {
       const response = await pixisApi.post("/user/login", { email, password });
       console.log(response.data);
+      localStorage.setItem("userId", response.data._id);
       return response.data;
     } catch (error) {
       console.log(error);

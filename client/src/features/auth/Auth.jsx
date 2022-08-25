@@ -48,6 +48,7 @@ const Auth = () => {
           password: inputs.password,
         })
       );
+      
       dispatch(login());
       navigate("/postfeed");
     }
