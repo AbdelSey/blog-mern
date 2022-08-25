@@ -8,7 +8,7 @@ import mongoose from "mongoose";
 // @access  Public
 
 export const getAllPosts = asyncHandler(async (req, res) => {
-  const posts = await Post.find();
+  const posts = await Post.find().populate("user");
 
   if (!posts) {
     return res.status(404).json({ msg: "blogs not found" });

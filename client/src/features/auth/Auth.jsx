@@ -167,7 +167,7 @@ const Auth = () => {
               <input
                 value={inputs.image}
                 onChange={handleChange}
-                type="file"
+                type="text"
                 name="image"
                 placeholder=" "
                 className="block w-full appearance-none focus:outline-none bg-transparent"

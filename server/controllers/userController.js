@@ -14,7 +14,7 @@ export const getAllUsers = asyncHandler(async (req, res, next) => {
 });
 
 // @desc    create new user
-// @route   POST /api/users/signup
+// @route   POST /api/user/register
 // @access  Public
 
 export const registerUser = asyncHandler(async (req, res, next) => {
@@ -53,7 +53,6 @@ export const registerUser = asyncHandler(async (req, res, next) => {
       userName: user.userName,
       email: user.email,
       image: user.image,
-      password: user.password,
       posts: user.posts,
       msg: "User created successfully",
     });
