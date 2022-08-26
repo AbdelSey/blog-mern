@@ -51,6 +51,16 @@ const postSlice = createSlice({
     [getAllUserPostsCall.rejected]: (state, action) => {
       state.isLoading = false;
     },
+    [getPostfromUserID.pending]: (state, action) => {
+      state.isLoading = true;
+    },
+    [getPostfromUserID.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.posts = action.payload; // action.payload is the response from the server
+    },
+    [getPostfromUserID.rejected]: (state, action) => {
+      state.isLoading = false;
+    },
   },
 });
 
