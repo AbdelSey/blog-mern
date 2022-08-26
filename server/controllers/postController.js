@@ -17,7 +17,7 @@ export const getAllPosts = asyncHandler(async (req, res) => {
   return res.status(200).json({ posts });
 });
 
-// @desc get one id
+// @desc get one by id
 // @route GET /api/posts/:id
 // @access private
 
