@@ -23,6 +23,8 @@ export const getAllUserPostsCall = createAsyncThunk(
   }
 );
 
+// get all posts of a specific user;
+
 export const getPostfromUserID = createAsyncThunk(
   "post/getOnePostfromuserID",
   async (id) => {
@@ -30,6 +32,25 @@ export const getPostfromUserID = createAsyncThunk(
       const response = await pixisApi.get(`/post/user/${id}`);
       console.log(response.data.user.posts);
       return response.data.user.posts;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+// add a post;
+
+export const createNewPost = createAsyncThunk(
+  "post/createnNewPost",
+  async ({ title, description, image }) => {
+    try {
+      const response = await pixisApi.post("/post/create", {
+        title,
+        description,
+        image,
+      });
+      console.log(response);
+      return response;
     } catch (error) {
       console.log(error);
     }
