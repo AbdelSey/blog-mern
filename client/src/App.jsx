@@ -17,7 +17,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/auth" element={<Auth />} />
         <Route path="/postfeed" element={<Posts />} />
-        <Route path="/posts/add" element={<AddPost />} />
+        <Route path="/posts/create" element={<AddPost />} />
         <Route path="/myPosts" element={<UserPosts />} />
         <Route path="/myPosts/:id" element={<PostDetail />} />
         <Route path="*" element={<Page404 />} />

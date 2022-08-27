@@ -2,7 +2,8 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import pixisApi from "../../api/pixisApi";
 
 const initialState = {
-  posts: [],
+  posts: [], // many posts
+  post: [], // single post
   isLoading: false,
 };
 
@@ -41,16 +42,30 @@ export const getPostfromUserID = createAsyncThunk(
 // add a post;
 
 export const createNewPost = createAsyncThunk(
-  "post/createnNewPost",
-  async ({ title, description, image }) => {
+  "post/createNewPost",
+  async ({ title, description, image, user }) => {
     try {
       const response = await pixisApi.post("/post/create", {
         title,
         description,
         image,
+        user,
       });
-      console.log(response);
-      return response;
+      console.log(response.data.post);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+export const getPostFromPostID = createAsyncThunk(
+  "post/getPostFromPostID",
+  async (id) => {
+    try {
+      const response = await pixisApi.get(`/post/${id}`);
+      console.log(response.data.post);
+      return response.data.post;
     } catch (error) {
       console.log(error);
     }
@@ -82,6 +97,16 @@ const postSlice = createSlice({
     [getPostfromUserID.rejected]: (state, action) => {
       state.isLoading = false;
     },
+    [getPostFromPostID.pending]: (state, action) => {
+      state.isLoading = true;
+    },
+    [getPostFromPostID.fulfilled]: (state, action) => {
+      state.post = action.payload; // action.payload is the response from the server
+      state.isLoading = false;
+    },
+    [getPostFromPostID.rejected]: (state, action) => {
+      state.isLoading = false;
+    },
   },
 });
 
@@ -89,3 +114,4 @@ export const { allUserPosts } = postSlice.actions;
 export default postSlice.reducer;
 
 export const getAllUserPosts = (state) => state.post.posts;
+export const getPostDetails = (state) => state.post.post;

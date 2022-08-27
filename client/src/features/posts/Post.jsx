@@ -1,6 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { getPostfromUserID } from "./postSlice";
+const Post = ({
+  title,
+  description,
+  postImage,
+  userImage,
+  userName,
+  isUser,
+  id,
+}) => {
+  const navigate = useNavigate();
 
-const Post = ({ title, description, postImage, userImage, userName }) => {
+  const handleEdit = (e) => {
+    e.preventDefault();
+    navigate(`/myPosts/${id}`);
+  };
+
   return (
     <div>
       <div class="relative max-w-md mx-auto md:max-w-2xl min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-xl mt-20">
@@ -29,17 +45,27 @@ const Post = ({ title, description, postImage, userImage, userName }) => {
           </div>
           <div class="mt-6 py-6 border-t border-slate-200 text-center">
             <div class="flex flex-wrap justify-center">
-              <div class="w-full px-4">
-                <p class="font-light leading-relaxed text-slate-600 mb-4">
-                  {description}
-                </p>
-                <a
-                  href="javascript:;"
-                  class="font-normal text-slate-700 hover:text-slate-400"
-                >
-                  Follow Account
-                </a>
+              <div class="relative">
+                {/* userImage */}
+                <img
+                  src={postImage}
+                  class="shadow-xl rounded-full align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-[100px]"
+                  alt="...Social Media"
+                />
               </div>
+
+              <p class="font-light leading-relaxed text-slate-600 mb-4">
+                {description}
+              </p>
+
+              {isUser && (
+                <div class="w-full px-4">
+                  <div className="flex flex-col">
+                    <button className="mb-2"> X </button>
+                    <button onClick={handleEdit}> UpDate </button>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>

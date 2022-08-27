@@ -1,8 +1,12 @@
 import React, { useState } from "react";
+import {
+  createNewPost,
+} from "../features/posts/postSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const AddPost = () => {
+  const dispatch = useDispatch();
   const [inputs, setInputs] = useState({
     title: "",
     description: "",
@@ -19,8 +23,16 @@ const AddPost = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(inputs);
+    dispatch(
+      createNewPost({
+        title: inputs.title,
+        description: inputs.description,
+        image: inputs.imageURL,
+        user: localStorage.getItem("userId"),
+      })
+    );
   };
+
 
   return (
     <section className="md:flex md:items-center md:justify-center">
