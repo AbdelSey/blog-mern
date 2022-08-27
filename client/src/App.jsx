@@ -14,13 +14,13 @@ function App() {
     <>
       <Header />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/auth" element={<Auth />} />
-        <Route path="/postfeed" element={<Posts />} />
-        <Route path="/posts/create" element={<AddPost />} />
-        <Route path="/myPosts" element={<UserPosts />} />
-        <Route path="/myPosts/:id" element={<PostDetail />} />
-        <Route path="*" element={<Page404 />} />
+        <Route exact path="/" element={<Home />} />
+        <Route exact path="/auth" element={<Auth />} />
+        <Route exact path="/postfeed" element={<Posts />} />
+        <Route exact path="/posts/create" element={<AddPost />} />
+        <Route exact path="/myPosts" element={<UserPosts />} />
+        <Route exact path="/myPosts/:id" element={<PostDetail />} />
+        <Route exact path="*" element={<Page404 />} />
       </Routes>
       <ToastContainer limit={1} />
     </>

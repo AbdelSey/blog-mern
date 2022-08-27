@@ -59,6 +59,7 @@ export const createNewPost = createAsyncThunk(
   }
 );
 
+// get post by id
 export const getPostFromPostID = createAsyncThunk(
   "post/getPostFromPostID",
   async (id) => {
@@ -71,6 +72,35 @@ export const getPostFromPostID = createAsyncThunk(
     }
   }
 );
+
+// update post by id
+
+export const updatePost = createAsyncThunk(
+  "post/updatePost",
+  async ({ id, title, description, image }) => {
+    try {
+      const response = await pixisApi.put(`/post/update/${id}`, {
+        title,
+        description,
+        image,
+      });
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+// delete post by id
+
+export const deletePost = createAsyncThunk("post/deletePost", async (id) => {
+  try {
+    const response = await pixisApi.delete(`/post/${id}`);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 const postSlice = createSlice({
   name: "post",
@@ -110,7 +140,6 @@ const postSlice = createSlice({
   },
 });
 
-export const { allUserPosts } = postSlice.actions;
 export default postSlice.reducer;
 
 export const getAllUserPosts = (state) => state.post.posts;
