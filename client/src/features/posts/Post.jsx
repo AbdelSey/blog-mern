@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { deletePostCall, deletePostFromState } from "./postSlice";
 import { useDispatch } from "react-redux";
+
 const Post = ({
   title,
   description,
@@ -27,7 +28,25 @@ const Post = ({
   };
 
   return (
-    <div>
+    <div className="flex flex-col items-center relative">
+      <figure class="px-10 pt-10 w-[200px] absolute top-2">
+        <img src={userImage} alt="Shoes" class="rounded-full" />
+      </figure>
+
+      <div class="card w-96 bg-base-100 shadow-xl">
+        <figure class="px-10 pt-10">
+          <img src={postImage} alt="Shoes" class="rounded-xl" />
+        </figure>
+
+        <h1> {userName}</h1>
+        <div class="card-body items-center text-center">
+          <h2 class="card-title">Shoes!</h2>
+          <p> Desciprtion: {description}</p>
+          <div class="card-actions">
+            <button class="btn btn-primary">Buy Now</button>
+          </div>
+        </div>
+      </div>
       <div class="relative max-w-md mx-auto md:max-w-2xl min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-xl mt-20">
         <div class="px-6">
           <div class="flex flex-wrap justify-center">

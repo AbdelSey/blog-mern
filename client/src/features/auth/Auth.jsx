@@ -13,6 +13,13 @@ const Auth = () => {
     image: "",
   });
 
+  const [errors, setErrors] = useState({
+    fullName: "",
+    userName: "",
+    email: "",
+    password: "",
+  });
+
   // changes the values according to the name identifers of the inputs
   const handleChange = (e) => {
     setInputs((prevState) => ({
@@ -125,6 +132,11 @@ const Auth = () => {
               >
                 Email
               </label>
+              {errors.email && (
+                <div className="text-2xl">
+                  "Must be valid email"{errors.email}
+                </div>
+              )}
             </div>
             {/* password */}
             <div className="relative border-b-2 focus-within:border-[#00B4F5]">
