@@ -22,7 +22,9 @@ module.exports = {
       transformOrigin: {
         0: "0%",
       },
-      backgroundImage: {},
+      backgroundImage: {
+        mainBG: "url('./src/assets/images/mainBG.svg')",
+      },
       zIndex: {
         "-1": "-1",
       },

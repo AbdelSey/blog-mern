@@ -68,7 +68,7 @@ const Auth = () => {
           {/* fullname */}
           {isSignUp && (
             <>
-              <div className="relative border-b-2 focus-within:border-blue-500">
+              <div className="relative border-b-2 focus-within:border-[#00B4F5]">
                 <input
                   type="text"
                   name="fullName"
@@ -86,7 +86,7 @@ const Auth = () => {
                 </label>
               </div>
               {/* username */}
-              <div className="relative border-b-2 focus-within:border-blue-500">
+              <div className="relative border-b-2 focus-within:border-[#00B4F5]">
                 <input
                   type="text"
                   name="userName"
@@ -107,7 +107,7 @@ const Auth = () => {
 
           {/* email */}
 
-          <div className="relative border-b-2 focus-within:border-blue-500">
+          <div className="relative border-b-2 focus-within:border-[#00B4F5]">
             <input
               type="text"
               name="email"
@@ -124,7 +124,7 @@ const Auth = () => {
             </label>
           </div>
           {/* password */}
-          <div className="relative border-b-2 focus-within:border-blue-500">
+          <div className="relative border-b-2 focus-within:border-[#00B4F5]">
             <input
               value={inputs.password}
               onChange={handleChange}
@@ -142,7 +142,7 @@ const Auth = () => {
           </div>
 
           {/* confirm password */}
-          {isSignUp && (
+          {/* {isSignUp && (
             <div className="relative border-b-2 focus-within:border-blue-500">
               <input
                 type="password"
@@ -159,12 +159,12 @@ const Auth = () => {
                 Confirm Password
               </label>
             </div>
-          )}
+          )} */}
 
           {/* image */}
 
           {isSignUp && (
-            <div className="relative border-b-2 focus-within:border-blue-500">
+            <div className="relative border-b-2 focus-within:border-[#00B4F5]">
               <input
                 value={inputs.image}
                 onChange={handleChange}
