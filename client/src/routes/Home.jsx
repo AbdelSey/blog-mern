@@ -2,12 +2,19 @@ import React from "react";
 
 const Home = () => {
   return (
-    <h1 className="text-center">
-      Welcome to Pixis! a social network for sharing your favorite photos and
-      memories.
-      <br />
-      Please go ahead and sign up and join the fun!
-    </h1>
+    <section className="flex items-center justify-center">
+      <div className="w-[1280px] h-[1000px] bg-yellow-400">
+
+        <article>
+          <h1>Welcome to Pixis</h1>
+        </article>
+
+        <article>
+          <h1>Picture</h1>
+        </article>
+        
+      </div>
+    </section>
   );
 };
 

@@ -93,19 +93,27 @@ export const updatePost = createAsyncThunk(
 
 // delete post by id
 
-export const deletePost = createAsyncThunk("post/deletePost", async (id) => {
-  try {
-    const response = await pixisApi.delete(`/post/${id}`);
-    return response;
-  } catch (error) {
-    console.log(error);
+export const deletePostCall = createAsyncThunk(
+  "post/deletePost",
+  async (id) => {
+    try {
+      const response = await pixisApi.delete(`/post/${id}`);
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
   }
-});
+);
 
 const postSlice = createSlice({
   name: "post",
   initialState,
-  reducers: {},
+  reducers: {
+    deletePostFromState: (state, action) => {
+      state.posts = state.posts.filter((post) => post._id !== action.payload);
+    },
+  },
   extraReducers: {
     [getAllUserPostsCall.pending]: (state, action) => {
       state.isLoading = true;
@@ -141,6 +149,7 @@ const postSlice = createSlice({
 });
 
 export default postSlice.reducer;
+export const { deletePostFromState } = postSlice.actions;
 
 export const getAllUserPosts = (state) => state.post.posts;
 export const getPostDetails = (state) => state.post.post;

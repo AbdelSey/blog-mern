@@ -11,12 +11,14 @@ const Header = () => {
     <header className="w-[100%]">
       {/* logo */}
       <div className="min-h-[50px] w-[100%] shadow-lg bg-yellow-200 flex justify-evenly items-center">
-        <div className="flex space-x-1 items-center">
-          <Link to="/">
-            <FcPicture />
-          </Link>
-          <h1 className="text-sm"> Pixis </h1>
-        </div>
+        {!isAuthenticated && (
+          <div className="flex space-x-1 items-center">
+            <Link to="/">
+              <FcPicture />
+            </Link>
+            <h1 className="text-sm"> Pixis </h1>
+          </div>
+        )}
 
         {/* authenticated links */}
         {isAuthenticated && (

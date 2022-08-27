@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getPostfromUserID } from "./postSlice";
+import { deletePostCall, deletePostFromState } from "./postSlice";
+import { useDispatch } from "react-redux";
 const Post = ({
   title,
   description,
@@ -15,6 +16,14 @@ const Post = ({
   const handleEdit = (e) => {
     e.preventDefault();
     navigate(`/myPosts/${id}`);
+  };
+
+  const dispatch = useDispatch();
+
+  const handleDelete = (e) => {
+    e.preventDefault();
+    dispatch(deletePostCall(id));
+    dispatch(deletePostFromState(id));
   };
 
   return (
@@ -61,7 +70,10 @@ const Post = ({
               {isUser && (
                 <div class="w-full px-4">
                   <div className="flex flex-col">
-                    <button className="mb-2"> X </button>
+                    <button onClick={handleDelete} className="mb-2">
+                      {" "}
+                      X{" "}
+                    </button>
                     <button onClick={handleEdit}> UpDate </button>
                   </div>
                 </div>
