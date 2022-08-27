@@ -24,6 +24,7 @@ module.exports = {
       },
       backgroundImage: {
         mainBG: "url('./src/assets/images/mainBG.svg')",
+        loginBG: "url('./src/assets/images/loginBG.svg')",
       },
       zIndex: {
         "-1": "-1",
