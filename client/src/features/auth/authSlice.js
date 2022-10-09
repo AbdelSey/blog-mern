@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { useNavigate } from "react-router-dom";
 import pixisApi from "../../api/pixisApi";
 
 const initialState = {
@@ -38,7 +39,9 @@ export const loginUser = createAsyncThunk(
       localStorage.setItem("userId", response.data._id);
       return response.data;
     } catch (error) {
-      console.log(error);
+      console.log("error", error);
+      const navigate = useNavigate();
+      navigate("/auth");
     }
   }
 );

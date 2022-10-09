@@ -14,11 +14,12 @@ const UserPosts = () => {
 
   return (
     <>
-      <h1 className="text-3xl"> User Posts </h1>
+     
       {userPosts
         ? userPosts.map((post, index) => {
             return (
               <Post
+                id={post._id}
                 key={index}
                 isUser={true}
                 description={post.description}
@@ -26,7 +27,6 @@ const UserPosts = () => {
                 postImage={post.image}
                 userImage={post.user.image}
                 userName={post.user.userName}
-                id={post._id}
               />
             );
           })

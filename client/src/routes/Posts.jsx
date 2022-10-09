@@ -17,16 +17,6 @@ const Posts = () => {
 
   return (
     <>
-      <h1> Posts </h1>
-      <Link to="/posts/create">
-        <button
-          type="button"
-          class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-base px-6 py-3.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        >
-          +
-        </button>
-      </Link>
-
       {posts
         ? posts.map((post, index) => {
             return (
@@ -43,6 +33,14 @@ const Posts = () => {
             );
           })
         : null}
+      <Link to="/posts/create">
+        <button
+          type="button"
+          class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-base px-6 py-3.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        >
+          +
+        </button>
+      </Link>
     </>
   );
 };
